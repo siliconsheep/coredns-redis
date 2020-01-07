@@ -22,6 +22,7 @@ type Redis struct {
 	keyPrefix      string
 	keySuffix      string
 	Ttl            uint32
+	useTls         bool
 	Zones          []string
 	LastZoneUpdate time.Time
 }

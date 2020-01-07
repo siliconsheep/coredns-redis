@@ -90,7 +90,7 @@ func redisParse(c *caddy.Controller) (*Redis, error) {
 						val = defaultTtl
 					}
 					redis.Ttl = uint32(val)
-				case "useTls":
+				case "use_tls":
 					if !c.NextArg() {
 						return &Redis{}, c.ArgErr()
 					}
