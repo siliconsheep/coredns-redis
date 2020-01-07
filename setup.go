@@ -34,6 +34,7 @@ func redisParse(c *caddy.Controller) (*Redis, error) {
 		keyPrefix:"",
 		keySuffix:"",
 		Ttl:300,
+		useTls: false,
 	}
 	var (
 		err            error
@@ -89,6 +90,14 @@ func redisParse(c *caddy.Controller) (*Redis, error) {
 						val = defaultTtl
 					}
 					redis.Ttl = uint32(val)
+				case "useTls":
+					if !c.NextArg() {
+						return &Redis{}, c.ArgErr()
+					}
+					redis.useTls, err = strconv.ParseBool(c.Val())
+					if err != nil {
+						redis.useTls = false;
+					}
 				default:
 					if c.Val() != "}" {
 						return &Redis{}, c.Errf("unknown property '%s'", c.Val())
